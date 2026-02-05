@@ -1,0 +1,221 @@
+Jeaner, ótimo — como você está lidando com database diária, dá para transformar o painel em um instrumento de supervisão contínua, alinhado às competências do art. 88 da Resolução BCB nº 520, que trata de monitoramento, prevenção e mitigação de riscos à estabilidade financeira, incluindo:
+- acompanhamento de instituições e conglomerados
+- análise de riscos sistêmicos
+- monitoramento de liquidez, solvência e interconexões
+- identificação de vulnerabilidades e anomalias
+- avaliação de infraestruturas do mercado financeiro
+Com isso em mente, selecionei visuais que realmente ajudam uma equipe de fiscalização a enxergar riscos emergentes, tensões sistêmicas e pontos de fragilidade no sistema.
+Organizei por temas para facilitar sua implementação no Power BI.
+
+1. Monitoramento diário da estabilidade do sistema
+Esses visuais capturam movimentos anormais entre um dia e outro.
+Indicadores diários (cards)
+- Variação diária da exposição total
+- Variação diária da liquidez agregada
+- Número de instituições com deterioração de liquidez
+- Número de clientes com aumento abrupto de exposição
+- Ativo com maior crescimento percentual no dia
+Esses indicadores ajudam a cumprir o dever de monitoramento contínuo previsto no art. 88.
+Gráfico de linha diário (exposição total do sistema)
+Mostra tendências e rupturas que podem sinalizar tensões sistêmicas.
+Heatmap diário (empresa × variação de exposição)
+Cores fortes revelam instituições com movimentos atípicos.
+
+2. Risco sistêmico e interconexões
+O art. 88 enfatiza a necessidade de identificar interdependências e efeitos de contágio.
+Matriz de correlação entre ativos
+Mostra se o sistema está excessivamente exposto a ativos que se movem juntos.
+Sankey (empresa → cliente → ativo)
+Revela concentrações e potenciais canais de transmissão de risco.
+Gráfico de rede (network graph)
+- Nós: empresas
+- Arestas: clientes ou ativos compartilhados
+- Peso: valor da exposição
+Ajuda a identificar conglomerados críticos e interconexões perigosas.
+
+3. Liquidez e solvência
+A resolução exige monitoramento da capacidade de pagamento e robustez das instituições.
+Gráfico de barras empilhadas (saldos por tipo de conta)
+Mostra composição da liquidez.
+Gauge (liquidez mínima vs. atual)
+Permite identificar instituições abaixo do nível prudencial.
+Linha do tempo (variação diária de liquidez)
+Quedas abruptas são sinais de alerta imediato.
+Boxplot de liquidez por porte
+Mostra dispersão e outliers entre empresas grandes, médias e pequenas.
+
+4. Concentração e vulnerabilidades
+O art. 88 menciona a necessidade de identificar vulnerabilidades estruturais.
+Treemap de concentração por ativo
+Mostra dependência excessiva de um único ativo.
+Barras horizontais (top 10 empresas por exposição)
+Ajuda a identificar instituições que podem gerar impacto sistêmico.
+Heatmap empresa × ativo
+Revela concentrações perigosas.
+Quartis de risco (Q1–Q4)
+Com base em:
+- exposição
+- liquidez
+- concentração
+- variação diária
+Permite segmentar instituições por criticidade.
+
+5. Risco por cliente
+Clientes podem ser fontes de instabilidade, especialmente quando muito concentrados.
+Histograma de exposição por cliente
+Mostra distribuição e caudas pesadas.
+Tabela de clientes críticos
+Com colunas:
+- empresa
+- valor total
+- variação diária
+- número de ativos
+Heatmap cliente × ativo
+Revela concentração individual.
+
+6. Alertas e detecção de anomalias
+O art. 88 exige mecanismos de identificação precoce de riscos.
+Tabela de alertas (regras DAX)
+Exemplos:
+- variação diária > 20%
+- liquidez abaixo do mínimo
+- concentração > 40% em um único ativo
+- cliente com crescimento abrupto
+- empresa com queda súbita de liquidez
+Scatter (exposição × variação diária)
+Pontos no quadrante superior direito são críticos.
+Z‑score diário por empresa
+Mostra desvios estatísticos relevantes.
+
+7. Acompanhamento de tendências e estresse
+Esses visuais ajudam a antecipar riscos.
+Linha de tendência por ativo
+Mostra ciclos e volatilidade.
+Volatilidade diária agregada
+Ajuda a identificar períodos de estresse.
+Indicador de risco sistêmico composto
+Pode combinar:
+- concentração
+- liquidez
+- interconexões
+- volatilidade
+
+Se quiser, posso montar:
+- o layout completo dessas abas no Power BI
+- as medidas DAX para cada visual
+- o modelo de dados ideal para suportar análises diárias
+- um painel de estresse sistêmico inspirado em frameworks internacionais
+É só me dizer para onde você quer levar esse dashboard.
+
+
+
+
+
+
+
+
+
+
+Um gráfico de velas semanal é uma excelente escolha para monitorar volatilidade, pressão compradora/vendedora e tendências estruturais por ativo dentro de cada empresa — exatamente o tipo de leitura que ajuda a fiscalização a identificar tensões de mercado, movimentos atípicos e possíveis riscos sistêmicos, como previsto no art. 88 da Resolução BCB nº 520.
+A seguir, descrevo como esse visual pode ser construído no Power BI e por que ele é útil para estabilidade financeira.
+
+Gráfico de velas semanal por ativo e por empresa
+O que o gráfico mostra
+Para cada empresa e cada ativo, o gráfico exibe:
+- Open (abertura da semana): valor do primeiro dia útil
+- High (máximo da semana)
+- Low (mínimo da semana)
+- Close (fechamento da semana): valor do último dia útil
+Isso permite identificar:
+- semanas de forte volatilidade
+- pressões de compra ou venda
+- movimentos abruptos de valorização ou desvalorização
+- padrões de risco crescente
+- possíveis manipulações ou distorções de preços
+Tudo isso é extremamente relevante para supervisão prudencial.
+
+Como montar no Power BI
+1. Criar agregações semanais
+Você precisa criar medidas ou colunas que agrupem por semana.
+Coluna de semana (Power Query ou DAX)
+Semana = WEEKNUM([database], 2)
+
+
+Medidas para OHLC
+Assumindo que a coluna valor representa o valor da posição:
+Abertura (Open)
+Open = 
+CALCULATE(
+    FIRSTNONBLANKVALUE('posicoes'[valor], 1),
+    FILTER(
+        ALL('posicoes'),
+        'posicoes'[Semana] = MAX('posicoes'[Semana]) &&
+        'posicoes'[empresaCNPJ] = MAX('posicoes'[empresaCNPJ]) &&
+        'posicoes'[ticker] = MAX('posicoes'[ticker])
+    )
+)
+
+
+Máximo (High)
+High = MAX('posicoes'[valor])
+
+
+Mínimo (Low)
+Low = MIN('posicoes'[valor])
+
+
+Fechamento (Close)
+Close =
+CALCULATE(
+    LASTNONBLANKVALUE('posicoes'[valor], 1),
+    FILTER(
+        ALL('posicoes'),
+        'posicoes'[Semana] = MAX('posicoes'[Semana]) &&
+        'posicoes'[empresaCNPJ] = MAX('posicoes'[empresaCNPJ]) &&
+        'posicoes'[ticker] = MAX('posicoes'[ticker])
+    )
+)
+
+
+2. Usar um visual de velas
+O Power BI não tem um candlestick nativo, mas você pode usar:
+- Financial Candlestick Chart (AppSource)
+- Advanced Candlestick (AppSource)
+- HTML Content visual com template de velas
+- Ou criar manualmente com barras empilhadas + linhas (menos recomendado)
+3. Segmentadores recomendados
+- Empresa
+- Ativo
+- Semana
+- Porte da empresa
+- Tipo de cliente
+
+Por que esse gráfico é útil para estabilidade financeira
+1. Detecta volatilidade anormal
+Volatilidade semanal elevada pode indicar:
+- estresse de mercado
+- liquidez reduzida
+- risco de contágio
+- manipulação de preços
+2. Identifica tendências estruturais
+Movimentos persistentes de alta ou baixa podem sinalizar:
+- concentração excessiva
+- desalinhamento de preços
+- risco de perda material
+3. Permite comparar empresas
+Com segmentadores, você pode ver:
+- quais empresas estão mais expostas a ativos voláteis
+- quais apresentam comportamento atípico
+- quais podem estar pressionando o mercado
+4. Ajuda a cumprir o art. 88 da Resolução 520
+O gráfico apoia:
+- monitoramento contínuo
+- identificação de vulnerabilidades
+- avaliação de riscos sistêmicos
+- análise de interconexões entre instituições e ativos
+
+Se quiser, posso montar:
+- o modelo de dados ideal para suportar OHLC
+- as medidas DAX completas já prontas para colar
+- um layout de dashboard com esse gráfico integrado
+- um painel semanal de risco sistêmico com velas, volatilidade e liquidez
