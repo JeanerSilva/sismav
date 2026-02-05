@@ -1,0 +1,131 @@
+🟦 LAYOUT COMPLETO DO DASHBOARD – Supervisão da Estabilidade Financeira
+📌 ABA 1 — Visão Sistêmica (Painel Principal)
+Objetivo: dar uma leitura imediata da saúde do sistema.
+Indicadores (cards)
+• 	Exposição total do sistema
+• 	Número de empresas supervisionadas
+• 	Número de clientes
+• 	Maior exposição individual
+• 	Maior concentração por ativo
+• 	Índice de concentração (HHI)
+• 	% de empresas acima do limite de concentração
+Visuais
+• 	Treemap — Distribuição por ativo
+Mostra se o sistema está dependente demais de um único ativo.
+• 	Barras horizontais — Top 10 empresas por exposição total
+Permite identificar instituições que podem gerar risco sistêmico.
+• 	Heatmap — Concentração por empresa × ativo
+Cores fortes revelam riscos imediatos.
+• 	Gráfico de linha — Evolução da exposição total (se houver histórico)
+Ajuda a detectar movimentos abruptos.
+Alertas automáticos (DAX)
+• 	Empresas com concentração > X%
+• 	Clientes com exposição acima do limite
+• 	Ativos com crescimento anormal
+
+🟦 ABA 2 — Risco por Empresa
+Objetivo: permitir investigação profunda por instituição.
+Segmentadores
+• 	Empresa
+• 	Porte (grande, média, pequena)
+• 	Ativo
+• 	Tipo de cliente
+Visuais
+• 	Radar — Perfil de risco da empresa
+Eixos sugeridos:
+• 	Concentração
+• 	Diversificação
+• 	Exposição total
+• 	Liquidez (contas)
+• 	Número de clientes
+• 	Número de ativos
+• 	Barras empilhadas — Exposição por ativo
+Mostra composição da carteira.
+• 	Tabela detalhada — Posições da empresa
+Colunas:
+• 	Cliente
+• 	Ativo
+• 	Quantidade
+• 	Valor
+• 	% da carteira
+• 	Gauge — Liquidez vs. faixa esperada para o porte
+Ajuda a detectar empresas descapitalizadas.
+• 	Scatter — Valor × Quantidade (por ativo)
+Outliers chamam atenção para riscos específicos.
+
+🟦 ABA 3 — Risco por Cliente
+Objetivo: identificar clientes que podem gerar instabilidade.
+Visuais
+• 	Histograma — Distribuição de exposição por cliente
+Mostra se há concentração em poucos clientes.
+• 	Tabela — Top 50 clientes por exposição
+Com colunas:
+• 	Empresa
+• 	Cliente
+• 	Valor total
+• 	Número de ativos
+• 	Heatmap — Cliente × Ativo
+Revela concentração individual.
+• 	Barras — Número de posições por cliente
+Ajuda a identificar comportamentos atípicos.
+
+🟦 ABA 4 — Análise de Ativos
+Objetivo: entender o risco por tipo de ativo.
+Visuais
+• 	Treemap — Participação dos ativos no sistema
+• 	Linha — Evolução do valor por ativo (se houver histórico)
+• 	Boxplot — Distribuição de valores por ativo
+Excelente para detectar outliers.
+• 	Barras — Exposição por ativo e por porte da empresa
+Mostra se pequenos players estão assumindo riscos excessivos.
+
+🟦 ABA 5 — Liquidez e Contas
+Objetivo: avaliar capacidade de pagamento e solvência.
+Visuais
+• 	Barras empilhadas — Saldos por tipo de conta
+• 	Heatmap — Empresas × Contas
+Cores fortes indicam concentração de liquidez.
+• 	Gauge — Liquidez mínima exigida vs. atual
+• 	Linha — Evolução dos saldos (se houver histórico)
+
+🟦 ABA 6 — Alertas e Investigações
+Objetivo: centralizar tudo que exige ação imediata.
+Visuais
+• 	Tabela de alertas (com regras DAX)
+Exemplos:
+• 	Empresa com concentração > 40% em um único ativo
+• 	Cliente com exposição acima de X
+• 	Empresa com liquidez abaixo do mínimo
+• 	Crescimento anormal (> 20% em 24h)
+• 	Sankey — Fluxo Empresa → Cliente → Ativo
+Ajuda a visualizar relações críticas.
+• 	Scatter — Empresas por risco × liquidez
+Quadrante superior esquerdo = risco alto + liquidez baixa.
+
+🟦 ABA 7 — Detalhamento (Drill‑through)
+Objetivo: permitir investigação profunda de qualquer item.
+Drill-throughs sugeridos
+• 	Empresa
+• 	Cliente
+• 	Ativo
+Cada drill mostra:
+• 	Todas as posições
+• 	Histórico (se houver)
+• 	Indicadores específicos
+• 	Comparação com pares
+
+🟦 ABA 8 — Documentação e Metodologia
+Objetivo: transparência e padronização.
+Conteúdos sugeridos
+• 	Definição de cada indicador
+• 	Regras de cálculo
+• 	Limites regulatórios
+• 	Metodologia de concentração
+• 	Glossário
+
+Se quiser, posso montar:
+• 	O modelo de dados ideal (relacionamentos, chaves, tabelas fato/dimensão)
+• 	As medidas DAX para cada visual
+• 	Um mockup visual do dashboard
+• 	A estrutura de pastas e nomenclatura para o projeto
+Me diga o próximo passo que você quer construir.
